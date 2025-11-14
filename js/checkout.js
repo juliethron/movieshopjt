@@ -1,1 +1,57 @@
+const container = document.querySelector("#checkout-list");
+const totalDisplay = document.querySelector("#checkout-total");
+const checkoutButton = document.querySelector("#checkout-btn");
+
+function loadCart() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  if (cart.length === 0) {
+    container.innerHTML = `<p class="empty-cart">Your basket is empty.</p>`;
+    totalDisplay.textContent = "$0.00";
+    checkoutButton.disabled = true;
+    return;
+  }
+
+  container.innerHTML = "";
+  let total = 0;
+  cart.forEach((item, index) => {
+    total += item.price;
+    container.innerHTML += `
+      <div class="checkout-item">
+        <div class="item-info">
+          <img src="${item.imageUrl}" alt="${item.name}" class="checkout-img" />
+          <div>
+            <h3>${item.name}</h3>
+            <p>${item.genre || "General"}</p>
+            <p>$${item.price.toFixed(2)}</p>
+          </div>
+        </div>
+        <button class="remove-btn" data-index="${index}">Remove</button>
+      </div>
+    `;
+  });
+  totalDisplay.textContent = `$${total.toFixed(2)}`;
+
+  document.querySelectorAll(".remove-btn").forEach(btn =>
+    btn.addEventListener("click", (e) => {
+      const index = e.target.dataset.index;
+      removeFromCart(index);
+    })
+  );
+
+  checkoutButton.disabled = false;
+}
+
+function removeFromCart(index) {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  loadCart();
+}
+
+checkoutButton.addEventListener("click", () => {
+  localStorage.removeItem("cart");
+  window.location.href = "./confirmation/index.html";
+});
+
+document.addEventListener("DOMContentLoaded", loadCart);
 
