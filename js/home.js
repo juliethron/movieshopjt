@@ -48,7 +48,7 @@ function displayMovies(movies) {
 
     container.innerHTML += `
       <div class="movie-card">
-        <img src="${image}" alt="${altText}" onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'" />
+        <img src="${image}" alt="${altText}" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x450?text=No+Image'" />
 
         <div class="movie-info">
           <h3>${movie.title}</h3>
