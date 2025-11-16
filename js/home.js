@@ -53,4 +53,21 @@ function displayMovies(movies) {
           <p>${movie.genre || "Unknown genre"}</p>
           <p>$${movie.price.toFixed(2)}</p>
 
-          <a href="product/index.html?id=${movie.id}" cl
+          <a href="product/index.html?id=${movie.id}" class="btn">
+            View Details
+          </a>
+        </div>
+      </div>
+    `;
+  });
+}
+
+genreFilter.addEventListener("change", (e) => {
+  const filtered = e.target.value
+    ? allMovies.filter(movie => movie.genre === e.target.value)
+    : allMovies;
+
+  displayMovies(filtered);
+});
+
+document.addEventListener("DOMContentLoaded", fetchProducts);
