@@ -42,32 +42,15 @@ function displayMovies(movies) {
   }
 
   movies.forEach(movie => {
-    const image = movie.image?.url || "https://via.placeholder.com/300x450?text=Image+Unavailable";
-    
+    const image = movie.image?.url || "https://via.placeholder.com/300x450?text=No+Image";
+
     container.innerHTML += `
       <div class="movie-card">
-        <img src="${image}" alt="${movie.title}" />
+        <img src="${image}" alt="${movie.image?.alt || movie.title}" />
 
         <div class="movie-info">
           <h3>${movie.title}</h3>
           <p>${movie.genre || "Unknown genre"}</p>
-          <p>$${(movie.price / 5).toFixed(2)}</p> <!-- adjusted price -->
+          <p>$${movie.price.toFixed(2)}</p>
 
-          <a href="./product/index.html?id=${movie.id}" class="btn">
-            View Details
-          </a>
-        </div>
-      </div>
-    `;
-  });
-}
-
-genreFilter.addEventListener("change", (e) => {
-  const filtered = e.target.value
-    ? allMovies.filter(movie => movie.genre === e.target.value)
-    : allMovies;
-
-  displayMovies(filtered);
-});
-
-document.addEventListener("DOMContentLoaded", fetchProducts);
+          <a href="product/index.html?id=${movie.id}" cl
