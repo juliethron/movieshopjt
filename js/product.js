@@ -11,9 +11,9 @@ async function fetchProduct() {
 
     const product = await res.json();
 
-    // Safe image and price handling
-    const image = product.images?.[0]?.url || "/movieshopjt/img/placeholder.jpg";
-    const price = (product.price / 5).toFixed(2); // reduce the price for realism
+    
+    const image = product.image?.url || "https://via.placeholder.com/500x700?text=No+Image";
+    const price = (product.price / 5).toFixed(2); 
 
     container.innerHTML = `
       <img src="${image}" alt="${product.title}" />
