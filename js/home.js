@@ -42,9 +42,8 @@ function displayMovies(movies) {
   }
 
   movies.forEach(movie => {
-    // Format title to match image filename in /img
     const cleanedTitle = movie.title.toLowerCase().replace(/[^a-z0-9]/g, "-");
-    const image = `img/${cleanedTitle}.jpg`; // e.g. "img/the-addams-family.jpg"
+    const image = `img/${cleanedTitle}.jpg`; 
     const altText = `Poster for ${movie.title}`;
 
     container.innerHTML += `
