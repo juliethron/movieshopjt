@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: #f2f6fc; /* slightly bluish tint for modern look */
+    background: #f2f6fc; 
     color: #333;
     min-height: 100vh;
     display: flex;
@@ -25,7 +25,7 @@ header {
 .logo h1 {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #1b1f3b; /* deep navy for sleekness */
+    color: #1b1f3b; 
 }
 
 .main-nav ul {
@@ -165,7 +165,7 @@ header {
 }
 
 .checkout-item {
-    background: #f8faff; /* subtle bluish tint for differentiation */
+    background: #f8faff; 
     padding: 15px;
     border-radius: 10px;
     display: flex;
@@ -275,4 +275,104 @@ footer {
 
 .movie-details .btn {
   margin-top: 20px;
+}
+
+
+.checkout-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.checkout-page h2 {
+    text-align: center;
+    color: #1b1f3b;
+    margin-bottom: 30px;
+}
+
+.checkout-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.checkout-item {
+    display: flex;
+    gap: 20px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    align-items: center;
+    border: 1px solid #e0e6f1;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.checkout-img {
+    width: 100px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+}
+
+.item-info h3 {
+    font-size: 1.1rem;
+    color: #1b1f3b;
+    margin-bottom: 6px;
+}
+
+.item-info p {
+    font-size: 0.95rem;
+    color: #444;
+    margin-bottom: 4px;
+}
+
+.checkout-summary {
+    text-align: right;
+    margin-top: 30px;
+    font-size: 1.2rem;
+    color: #1b1f3b;
+}
+
+.checkout-summary .btn {
+    margin-top: 15px;
+}
+
+
+.confirmation-page {
+    padding: 120px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.confirmation-page h2 {
+    font-size: 2.4rem;
+    margin-bottom: 16px;
+    color: #1b1f3b;
+}
+
+.confirmation-page p {
+    max-width: 600px;
+    font-size: 1.1rem;
+    color: #4a4f6b;
+    margin-bottom: 30px;
+}
+
+.confirmation-page .btn {
+    padding: 10px 14px;
+}
+
+
+.empty-cart {
+    text-align: center;
+    padding: 40px;
+    color: #4a4f6b;
+}
+
+button:hover,
+.btn:hover {
+    transform: translateY(-2px) scale(1.03);
 }
