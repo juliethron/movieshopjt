@@ -5,7 +5,7 @@ const API_URL = "https://api.noroff.dev/api/v1/square-eyes";
 let allMovies = [];
 
 const customImages = {
-  "Fast & Furious Presents: Hobbs & Shaw": "img/hobbs-shaw.jpg",
+  "Fast & Furious Presents: Hobbs & Shaw": "img/fast-furious-presents-hobbs-shaw.jpg",
 };
 
 
