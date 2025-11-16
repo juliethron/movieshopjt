@@ -10,17 +10,20 @@ async function fetchProduct() {
     if (!res.ok) throw new Error("Product not found.");
 
     const product = await res.json();
+
     const image = product.image?.url || "https://via.placeholder.com/500x700?text=No+Image";
+    const altText = product.image?.alt || `Poster of ${product.title}`;
 
     container.innerHTML = `
-      <img src="${image}" alt="${product.image?.alt || product.title}" />
+      <img src="${image}" alt="${altText}" />
       <h1>${product.title}</h1>
       <p><strong>Genre:</strong> ${product.genre || "N/A"}</p>
       <p>${product.description || "No description available."}</p>
-      <p class="price"><strong>Price:</strong> $${product.price.toFixed(2)}</p>
+      <p class="price"><strong>Price:</strong> $${product.price.toFixed(2) || "N/A"}</p>
       <button id="addToCart" class="btn">Add to Basket</button>
     `;
 
+    // Add product to cart
     document.querySelector("#addToCart").addEventListener("click", () => addToCart(product));
 
   } catch (error) {
