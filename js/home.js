@@ -4,11 +4,6 @@ const API_URL = "https://api.noroff.dev/api/v1/square-eyes";
 
 let allMovies = [];
 
-const customImages = {
-  "Fast & Furious Presents: Hobbs & Shaw": "img/fast-furious-presents-hobbs-shaw.jpg",
-};
-
-
 async function fetchProducts() {
   container.innerHTML = `<p class="loading">Loading movies...</p>`;
 
@@ -17,10 +12,11 @@ async function fetchProducts() {
     if (!res.ok) throw new Error("Failed to fetch products.");
 
     const products = await res.json();
-
     allMovies = products;
+
     populateFilter(products);
     displayMovies(products);
+
   } catch (error) {
     container.innerHTML = `<p class="error">⚠️ ${error.message}</p>`;
   }
@@ -46,18 +42,13 @@ function displayMovies(movies) {
   }
 
   movies.forEach(movie => {
-    const cleanedTitle = movie.title
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")   
-      .replace(/^-|-$/g, "");   
-
- const image = customImages[movie.title] || `img/${cleanedTitle}.jpg`;
-
-    
+    const cleanedTitle = movie.title.toLowerCase().replace(/[^a-z0-9]/g, "-");
+    const image = `img/${cleanedTitle}.jpg`;
+    const altText = `Poster for ${movie.title}`;
 
     container.innerHTML += `
       <div class="movie-card">
-        <img src="${image}" alt="${altText}" />
+        <img src="${image}" alt="${altText}" onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'" />
 
         <div class="movie-info">
           <h3>${movie.title}</h3>
