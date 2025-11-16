@@ -13,22 +13,28 @@ function loadCart() {
 
   container.innerHTML = "";
   let total = 0;
+
   cart.forEach((item, index) => {
-    total += item.price;
+    const image = item.images?.[0]?.url || "/movieshopjt/img/placeholder.jpg";
+    const price = (item.price / 5).toFixed(2); // match pricing from home.js
+
+    total += Number(price);
+
     container.innerHTML += `
       <div class="checkout-item">
         <div class="item-info">
-          <img src="${item.imageUrl}" alt="${item.name}" class="checkout-img" />
+          <img src="${image}" alt="${item.title}" class="checkout-img" />
           <div>
-            <h3>${item.name}</h3>
+            <h3>${item.title}</h3>
             <p>${item.genre || "General"}</p>
-            <p>$${item.price.toFixed(2)}</p>
+            <p>$${price}</p>
           </div>
         </div>
         <button class="remove-btn" data-index="${index}">Remove</button>
       </div>
     `;
   });
+
   totalDisplay.textContent = `$${total.toFixed(2)}`;
 
   document.querySelectorAll(".remove-btn").forEach(btn =>
@@ -54,4 +60,3 @@ checkoutButton.addEventListener("click", () => {
 });
 
 document.addEventListener("DOMContentLoaded", loadCart);
-
