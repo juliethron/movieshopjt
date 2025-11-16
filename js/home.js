@@ -42,16 +42,19 @@ function displayMovies(movies) {
   }
 
   movies.forEach(movie => {
-    const image = movie.image?.url || "https://via.placeholder.com/300x450?text=No+Image";
+    // Image fallback logic
+    const image = movie.image?.url || 
+      "https://via.placeholder.com/300x450?text=Image+Unavailable";
+    const altText = movie.image?.alt || `Poster of ${movie.title}`;
 
     container.innerHTML += `
       <div class="movie-card">
-        <img src="${image}" alt="${movie.image?.alt || movie.title}" />
+        <img src="${image}" alt="${altText}" />
 
         <div class="movie-info">
           <h3>${movie.title}</h3>
           <p>${movie.genre || "Unknown genre"}</p>
-          <p>$${movie.price.toFixed(2)}</p>
+          <p>$${movie.price?.toFixed(2) || "N/A"}</p>
 
           <a href="product/index.html?id=${movie.id}" class="btn">
             View Details
