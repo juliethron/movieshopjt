@@ -42,7 +42,7 @@ function displayMovies(movies) {
   }
 
   movies.forEach(movie => {
-    const image = movie.images?.[0]?.url || "img/placeholder.jpg";
+    const image = movie.images?.[0]?.url || "/movieshopjt/img/placeholder.jpg";
 
     container.innerHTML += `
       <div class="movie-card">
@@ -51,9 +51,9 @@ function displayMovies(movies) {
         <div class="movie-info">
           <h3>${movie.title}</h3>
           <p>${movie.genre || "Unknown genre"}</p>
-          <p>$${movie.price?.toFixed(2) || "N/A"}</p>
+          <p>$${(movie.price / 5).toFixed(2)}</p> <!-- adjusted price -->
 
-          <a href="product/index.html?id=${movie.id}" class="btn">
+          <a href="./product/index.html?id=${movie.id}" class="btn">
             View Details
           </a>
         </div>
