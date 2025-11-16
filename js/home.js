@@ -42,8 +42,8 @@ function displayMovies(movies) {
   }
 
   movies.forEach(movie => {
-    const image = movie.images?.[0]?.url || "/movieshopjt/img/placeholder.jpg";
-
+    const image = movie.image?.url || "https://via.placeholder.com/300x450?text=Image+Unavailable";
+    
     container.innerHTML += `
       <div class="movie-card">
         <img src="${image}" alt="${movie.title}" />
