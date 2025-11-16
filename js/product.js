@@ -11,15 +11,16 @@ async function fetchProduct() {
 
     const product = await res.json();
 
-    // Correct image path according to API
-    const image = product.images?.[0]?.url || "../img/placeholder.jpg";
+    // Safe image and price handling
+    const image = product.images?.[0]?.url || "/movieshopjt/img/placeholder.jpg";
+    const price = (product.price / 5).toFixed(2); // reduce the price for realism
 
     container.innerHTML = `
       <img src="${image}" alt="${product.title}" />
       <h1>${product.title}</h1>
-      <p><strong>Genre:</strong> ${product.genre || "N/A"}</p>
+      <p><strong>Genre:</strong> ${product.genre || "Unknown Genre"}</p>
       <p>${product.description || "No description available."}</p>
-      <p class="price"><strong>Price:</strong> $${product.price.toFixed(2)}</p>
+      <p class="price"><strong>Price:</strong> $${price}</p>
       <button id="addToCart" class="btn">Add to Basket</button>
     `;
 
