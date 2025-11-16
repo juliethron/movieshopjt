@@ -16,7 +16,7 @@ function loadCart() {
 
   cart.forEach((item, index) => {
     const image = item.images?.[0]?.url || "/movieshopjt/img/placeholder.jpg";
-    const price = (item.price / 5).toFixed(2); // match pricing from home.js
+    const price = (item.price / 5).toFixed(2); 
 
     total += Number(price);
 
