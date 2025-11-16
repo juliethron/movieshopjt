@@ -7,8 +7,6 @@ let allMovies = [];
 
 const customImages = {
   "Fast & Furious Presents: Hobbs & Shaw": "img/fast--furious-presents--hobbs--shaw.jpg",
-  "Avengers: Endgame": "img/avengers-endgame.jpg",
-  "Godzilla: King of the Monsters": "img/godzilla-king-of-the-monsters.jpg"
 };
 
 async function fetchProducts() {
