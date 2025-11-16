@@ -4,6 +4,13 @@ const API_URL = "https://api.noroff.dev/api/v1/square-eyes";
 
 let allMovies = [];
 
+
+const customImages = {
+  "Fast & Furious Presents: Hobbs & Shaw": "img/hobbs-shaw.jpg",
+  "Avengers: Endgame": "img/avengers-endgame.jpg",
+  "Godzilla: King of the Monsters": "img/godzilla-king-of-the-monsters.jpg"
+};
+
 async function fetchProducts() {
   container.innerHTML = `<p class="loading">Loading movies...</p>`;
 
@@ -42,8 +49,14 @@ function displayMovies(movies) {
   }
 
   movies.forEach(movie => {
+
+    
     const cleanedTitle = movie.title.toLowerCase().replace(/[^a-z0-9]/g, "-");
-    const image = `img/${cleanedTitle}.jpg`; 
+    const defaultPath = `img/${cleanedTitle}.jpg`;
+
+    
+    const image = customImages[movie.title] || defaultPath;
+
     const altText = `Poster for ${movie.title}`;
 
     container.innerHTML += `
@@ -73,4 +86,3 @@ genreFilter.addEventListener("change", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", fetchProducts);
-
