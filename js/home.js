@@ -4,6 +4,11 @@ const API_URL = "https://api.noroff.dev/api/v1/square-eyes";
 
 let allMovies = [];
 
+const customImages = {
+  "Fast & Furious Presents: Hobbs & Shaw": "img/hobbs-shaw.jpg",
+};
+
+
 async function fetchProducts() {
   container.innerHTML = `<p class="loading">Loading movies...</p>`;
 
@@ -44,10 +49,11 @@ function displayMovies(movies) {
     const cleanedTitle = movie.title
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")   
-      .replace(/^-|-$/g, "");        
+      .replace(/^-|-$/g, "");   
 
-    const image = `img/${cleanedTitle}.jpg`;
-    const altText = `Poster for ${movie.title}`;
+ const image = customImages[movie.title] || `img/${cleanedTitle}.jpg`;
+
+    
 
     container.innerHTML += `
       <div class="movie-card">
