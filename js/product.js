@@ -11,7 +11,6 @@ async function fetchProduct() {
 
     const product = await res.json();
 
-    // Create image name from product title
     const cleanedTitle = product.title.toLowerCase().replace(/[^a-z0-9]/g, "-");
     const image = `../img/${cleanedTitle}.jpg`; 
     const altText = `Poster for ${product.title}`;
