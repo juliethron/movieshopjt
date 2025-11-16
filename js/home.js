@@ -6,21 +6,25 @@ let allMovies = [];
 
 async function fetchProducts() {
   container.innerHTML = `<p class="loading">Loading movies...</p>`;
+
   try {
     const res = await fetch(API_URL);
     if (!res.ok) throw new Error("Failed to fetch products.");
+
     const products = await res.json();
 
     allMovies = products;
     populateFilter(products);
     displayMovies(products);
+
   } catch (error) {
     container.innerHTML = `<p class="error">⚠️ ${error.message}</p>`;
   }
 }
 
 function populateFilter(movies) {
-  const genres = [...new Set(movies.map(movie => movie.genre))];
+  const genres = [...new Set(movies.map(movie => movie.genre).filter(Boolean))];
+
   genres.forEach(genre => {
     const option = document.createElement("option");
     option.value = genre;
@@ -31,20 +35,27 @@ function populateFilter(movies) {
 
 function displayMovies(movies) {
   container.innerHTML = "";
+
   if (movies.length === 0) {
     container.innerHTML = `<p class="error">No movies found for this genre.</p>`;
     return;
   }
 
   movies.forEach(movie => {
+    const image = movie.images?.[0]?.url || "img/placeholder.jpg";
+
     container.innerHTML += `
       <div class="movie-card">
-        <img src="${movie.imageUrl}" alt="${movie.name}" />
+        <img src="${image}" alt="${movie.title}" />
+
         <div class="movie-info">
-          <h3>${movie.name}</h3>
-          <p>${movie.genre}</p>
-          <p>$${movie.price.toFixed(2)}</p>
-          <a href="product/index.html?id=${movie.id}" class="btn">View Details</a>
+          <h3>${movie.title}</h3>
+          <p>${movie.genre || "Unknown genre"}</p>
+          <p>$${movie.price?.toFixed(2) || "N/A"}</p>
+
+          <a href="product/index.html?id=${movie.id}" class="btn">
+            View Details
+          </a>
         </div>
       </div>
     `;
@@ -52,9 +63,11 @@ function displayMovies(movies) {
 }
 
 genreFilter.addEventListener("change", (e) => {
-  const filtered = e.target.value ? allMovies.filter(m => m.genre === e.target.value) : allMovies;
+  const filtered = e.target.value
+    ? allMovies.filter(movie => movie.genre === e.target.value)
+    : allMovies;
+
   displayMovies(filtered);
 });
 
 document.addEventListener("DOMContentLoaded", fetchProducts);
-
