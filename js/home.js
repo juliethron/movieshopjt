@@ -42,9 +42,10 @@ function displayMovies(movies) {
   }
 
   movies.forEach(movie => {
-    // Image fallback logic
-    const image = movie.image?.url || 
-      "https://via.placeholder.com/300x450?text=Image+Unavailable";
+
+    const cleanedTitle = movie.title.toLowerCase().replace(/[^a-z0-9]/g, "-");
+const image = `img/${cleanedTitle}.jpg`;
+;
     const altText = movie.image?.alt || `Poster of ${movie.title}`;
 
     container.innerHTML += `
