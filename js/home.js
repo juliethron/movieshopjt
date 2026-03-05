@@ -42,7 +42,10 @@ function displayMovies(movies) {
   }
 
   movies.forEach(movie => {
-    const cleanedTitle = movie.title.toLowerCase().replace(/[^a-z0-9]/g, "-");
+   const cleanedTitle = movie.title
+  .toLowerCase()
+  .replace(/[^a-z0-9]/g, "-")
+  .replace(/-+/g, "-");
     const image = `img/${cleanedTitle}.jpg`;
     const altText = `Poster for ${movie.title}`;
 
