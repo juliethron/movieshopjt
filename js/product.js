@@ -11,8 +11,10 @@ async function fetchProduct() {
 
     const product = await res.json();
 
-    const cleanedTitle = product.title.toLowerCase().replace(/[^a-z0-9]/g, "-");
-    const image = `../img/${cleanedTitle}.jpg`; 
+const cleanedTitle = movie.title
+  .toLowerCase()
+  .replace(/[^a-z0-9]/g, "-")
+  .replace(/-+/g, "-");    const image = `../img/${cleanedTitle}.jpg`; 
     const altText = `Poster for ${product.title}`;
 
     container.innerHTML = `
