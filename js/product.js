@@ -3,41 +3,51 @@ const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
 async function fetchProduct() {
-  container.innerHTML = `<p class="loading">Loading product...</p>`;
+container.innerHTML = `<p class="loading">Loading product...</p>`;
 
-  try {
-    const res = await fetch(`https://api.noroff.dev/api/v1/square-eyes/${id}`);
-    if (!res.ok) throw new Error("Product not found.");
+try {
+const res = await fetch(`https://api.noroff.dev/api/v1/square-eyes/${id}`);
+if (!res.ok) throw new Error("Product not found.");
 
-    const product = await res.json();
+```
+const product = await res.json();
 
-const cleanedTitle = movie.title
+const cleanedTitle = product.title
   .toLowerCase()
   .replace(/[^a-z0-9]/g, "-")
-  .replace(/-+/g, "-");    const image = `../img/${cleanedTitle}.jpg`; 
-    const altText = `Poster for ${product.title}`;
+  .replace(/-+/g, "-");
 
-    container.innerHTML = `
-      <img src="${image}" alt="${altText}" />
-      <h1>${product.title}</h1>
-      <p><strong>Genre:</strong> ${product.genre || "N/A"}</p>
-      <p>${product.description || "No description available."}</p>
-      <p class="price"><strong>Price:</strong> $${product.price?.toFixed(2) || "N/A"}</p>
-      <button id="addToCart" class="btn">Add to Basket</button>
-    `;
+const image = product.title.includes("Hobbs & Shaw")
+  ? "../img/fast-furious-presents-hobbs-shaw.jpg"
+  : `../img/${cleanedTitle}.jpg`;
 
-    document.querySelector("#addToCart").addEventListener("click", () => addToCart(product));
+const altText = `Poster for ${product.title}`;
 
-  } catch (error) {
-    container.innerHTML = `<p class="error">⚠️ ${error.message}</p>`;
-  }
+container.innerHTML = `
+  <img src="${image}" alt="${altText}" 
+  onerror="this.onerror=null; this.src='https://via.placeholder.com/300x450?text=No+Image'" />
+  <h1>${product.title}</h1>
+  <p><strong>Genre:</strong> ${product.genre || "N/A"}</p>
+  <p>${product.description || "No description available."}</p>
+  <p class="price"><strong>Price:</strong> $${product.price?.toFixed(2) || "N/A"}</p>
+  <button id="addToCart" class="btn">Add to Basket</button>
+`;
+
+document
+  .querySelector("#addToCart")
+  .addEventListener("click", () => addToCart(product));
+```
+
+} catch (error) {
+container.innerHTML = `<p class="error">⚠️ ${error.message}</p>`;
+}
 }
 
 function addToCart(product) {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push(product);
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert(`"${product.title}" has been added to your basket!`);
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
+cart.push(product);
+localStorage.setItem("cart", JSON.stringify(cart));
+alert(`"${product.title}" has been added to your basket!`);
 }
 
 document.addEventListener("DOMContentLoaded", fetchProduct);
