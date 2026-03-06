@@ -9,7 +9,7 @@ try {
 const res = await fetch(`https://api.noroff.dev/api/v1/square-eyes/${id}`);
 if (!res.ok) throw new Error("Product not found.");
 
-```
+
 const product = await res.json();
 
 const cleanedTitle = product.title
@@ -24,7 +24,7 @@ const image = product.title.includes("Hobbs & Shaw")
 const altText = `Poster for ${product.title}`;
 
 container.innerHTML = `
-  <img src="${image}" alt="${altText}" 
+  <img src="${image}" alt="${altText}"
   onerror="this.onerror=null; this.src='https://via.placeholder.com/300x450?text=No+Image'" />
   <h1>${product.title}</h1>
   <p><strong>Genre:</strong> ${product.genre || "N/A"}</p>
@@ -36,7 +36,7 @@ container.innerHTML = `
 document
   .querySelector("#addToCart")
   .addEventListener("click", () => addToCart(product));
-```
+
 
 } catch (error) {
 container.innerHTML = `<p class="error">⚠️ ${error.message}</p>`;
