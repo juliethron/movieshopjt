@@ -11,13 +11,13 @@ try {
 const res = await fetch(API_URL);
 if (!res.ok) throw new Error("Failed to fetch products.");
 
-```
+
 const products = await res.json();
 allMovies = products;
 
 populateFilter(products);
 displayMovies(products);
-```
+
 
 } catch (error) {
 container.innerHTML = `<p class="error">⚠️ ${error.message}</p>`;
@@ -49,7 +49,7 @@ const cleanedTitle = movie.title
 .replace(/[^a-z0-9]/g, "-")
 .replace(/-+/g, "-");
 
-```
+
 const image = movie.title.includes("Hobbs & Shaw")
   ? "img/fast-furious-presents-hobbs-shaw.jpg"
   : `img/${cleanedTitle}.jpg`;
@@ -71,7 +71,7 @@ container.innerHTML += `
     </div>
   </div>
 `;
-```
+
 
 });
 }
